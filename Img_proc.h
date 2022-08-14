@@ -67,14 +67,14 @@ template<typename T, unsigned int w, unsigned int h> struct K_mat {
 		float det = abs(in.val[0][0] * in.val[1][1] * in.val[2][2]
 			          + in.val[0][1] * in.val[1][2] * in.val[2][0]
 			          + in.val[0][2] * in.val[2][1] * in.val[1][0]
-                      - in.val[0][2] * in.val[1][1] * in.val[2][0]
+                                  - in.val[0][2] * in.val[1][1] * in.val[2][0]
 			          - in.val[0][0] * in.val[2][1] * in.val[1][2]
 			          - in.val[0][1] * in.val[1][0] * in.val[2][2]);
 		if (1e-7 < det) {  // machine epsilon of 32bit is 1.192e-7
 			for (unsigned int i = 0; i < h; i++) {
 				for (unsigned int j = 0; j < w; j++) {
 					val[i][j] = in.val[(i + 1) % 3][(j + 1) % 3] * in.val[(i + 2) % 3][(j + 2) % 3]
-						      - in.val[(i + 2) % 3][(j + 1) % 3] * in.val[(i + 1) % 3][(j + 2) % 3];
+						  - in.val[(i + 2) % 3][(j + 1) % 3] * in.val[(i + 1) % 3][(j + 2) % 3];
 					val[i][j] = __fdividef(val[i][j], det);
 				}
 			}
